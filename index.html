@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capstone: Responsive Product Catalog</title>
+  <meta name="description" content="A fast, responsive, cross-browser product catalog with search, filters, sorting, lazy-loading images, and dark mode." />
+  
+  <!-- Link external CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="topbar container">
+      <div class="title">🛍️ Product Catalog</div>
+      <div class="grow"></div>
+      <label class="ctrl" aria-label="Search products">
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5 1.49-1.49-5-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input id="search" type="search" placeholder="Search products…" autocomplete="off" />
+      </label>
+      <select id="sort" class="select" aria-label="Sort">
+        <option value="pop">Sort: Popular</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="name-asc">Name: A → Z</option>
+        <option value="name-desc">Name: Z → A</option>
+      </select>
+      <button id="themeBtn" class="btn" aria-pressed="false" aria-label="Toggle dark mode">🌗 Theme</button>
+    </div>
+  </header>
+
+  <div class="layout container">
+    <aside aria-label="Filters">
+      <div class="filters">
+        <div class="group">
+          <h3>Categories</h3>
+          <div id="catList"></div>
+        </div>
+        <div class="group">
+          <h3>Price (₹)</h3>
+          <div class="range">
+            <span id="priceMin">0</span>
+            <input type="range" id="priceRange" min="0" max="200000" step="1000" value="200000" aria-label="Maximum price" />
+            <span id="priceMax">200000</span>
+          </div>
+        </div>
+        <div class="group">
+          <h3>Rating</h3>
+          <label><input type="radio" name="rating" value="0" checked /> Any</label>
+          <label><input type="radio" name="rating" value="4" /> 4★ & up</label>
+          <label><input type="radio" name="rating" value="4.5" /> 4.5★ & up</label>
+        </div>
+        <div class="group">
+          <button id="clearBtn" class="btn" style="width:100%">Clear Filters</button>
+        </div>
+        <p class="count" aria-live="polite"><span id="countText"></span></p>
+      </div>
+    </aside>
+
+    <main>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <small>Made with vanilla HTML/CSS/JS • Lazy-loaded, responsive images • Cross-browser friendly</small>
+  </footer>
+
+  <template id="cardTpl">
+    <article class="card" role="article">
+      <div class="media skeleton">
+        <span class="badge"></span>
+        <img alt="" loading="lazy" />
+      </div>
+      <div class="content">
+        <div class="row">
+          <div class="title-sm"></div>
+          <div class="price"></div>
+        </div>
+        <div class="row">
+          <div class="rating" aria-label=""></div>
+          <span class="chip category"></span>
+        </div>
+        <button class="btn add">Add to Cart</button>
+      </div>
+    </article>
+  </template>
+
+  <!-- Link external JS -->
+  <script src="script.js" defer></script>
+</body>
+</html>
